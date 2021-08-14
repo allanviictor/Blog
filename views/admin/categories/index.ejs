@@ -1,0 +1,58 @@
+<%- include('../../partials/header') %> <!-- o ejs identifica a partir da pasta views -->
+
+<body>
+  <%- include('../../partials/navbar')%>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <hr>
+        <h1>Categorias</h1>
+        <a href="/admin/categorias/news" class="btn btn-success">Cadastrar Nova Categoria</a>
+        <hr>
+        <table class="table table-bordered mt-5">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Título</th>
+              <th scope="col">Slug</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% catetories.forEach((item)=> { %>
+              <tr>
+                <th><%= item.id %></th>
+                <td><%= item.title %></td>
+                <td  ><%= item.slug %></td>
+                <td class="">
+                  <button class="btn btn-warning">Editar</button>
+                  <form method="POST" action="/categories/delete" style="display: inline;" onsubmit="submitForm(event,this)">
+                    <input type="hidden" name="id" value="<%= item.id %>">
+                    <button class="btn btn-danger">Excluir</button>
+                  </form>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+    
+
+</body>
+
+<script>
+
+  function submitForm(event,form){
+    event.preventDefault();
+    var resultado = confirm('Tme certeza que vôce quer excluir essa categoria')
+    if(resultado){
+      form.submit()
+    }
+  }
+
+</script>
+
+<%- include('../../partials/footer') %>

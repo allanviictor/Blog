@@ -53,6 +53,34 @@ router.get('/admin/categorias',(req,res) => {
 
 })
 
+router.get('/admin/categorias/editar/:id',(req,res) => {
+    let id = req.params.id
+    if(isNaN(id)){
+        res.redirect('/admin/categorias')
+    }
+    
+    console.log('caiu aqui')
+    category.findOne({ where: { id } }).then((categorie)=> {
+        if(categorie != undefined){
+            res.render('admin/categories/edit',{ catergorie: categorie})
+        }else{
+            res.redirect('/admin/categorias')
+        }
+    })
+
+})
+
+router.post('/categories/update',(req,res)=> {
+    let id = req.body.id;
+    let titulo = req.body.titulo
+
+    category.update({ title:titulo, slug: slugify(titulo) },{ //atualize o titulo e slug da categoria
+        where: { id: id } // onde o id seja igual o id da requisição
+    }).then(()=> {
+        res.redirect('/admin/categorias')
+    })
+})
+
 
 
 module.exports = router;

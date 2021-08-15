@@ -1,0 +1,26 @@
+<%- include('../../partials/header') %> <!-- o ejs identifica a partir da pasta views -->
+
+<body>
+    <%- include('../../partials/navbar')%>
+  
+    <div class="container">
+        <hr>
+        <div class="card">
+            <div class="card-header">
+                <h2>Editar Categorias</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/categories/update">
+                    <input type="hidden" name="id" value="<%= catergorie.id %>">
+                    <input type="text" class="form-control"  value="<%= catergorie.title %>" name="titulo"  placeholder="Defina o titulo da categoria"><br>
+                    <button class="btn btn-success">Atualizar</button>
+                    <a href="./index" class="btn btn-secondary">voltar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<%- include('../../partials/footer') %>

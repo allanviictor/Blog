@@ -1,0 +1,25 @@
+<%- include('./partials/header') %>
+
+<body>
+   
+    <%- include('./partials/navbar')%>
+
+    <div class="container">
+        <% articles.forEach(item => { %>
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h2> <%= item.titulo %> </h2>
+                </div>
+                <div class="card-body">
+                    <form method="" action="">
+                        <a href="/<%= item.slug%>" class="btn btn-success mt-2">Visualizar</a>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</body>
+
+
+
+<%- include('./partials/footer') %>

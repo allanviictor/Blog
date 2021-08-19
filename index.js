@@ -33,8 +33,33 @@ app.use('/',ArticlesController);
 
 
 app.get('/',(req, resp) => {
-    resp.render('index')
+    Articles.findAll().then((articles) => {
+        if(articles != undefined){
+            
+            resp.render('home',{ articles: articles })
+        }else{
+            resp.redirect('/admin/artigos')
+        }
+    })
 });
+
+app.get('/:slug',(req,res) => {
+    let slug = req.params.slug;
+    Articles.findOne({
+        where:{ slug: slug }
+    }).then((artigo)=> {
+        if(artigo != undefined){
+            res.render('article', { artigo })
+        }else{
+            res.redirect('/')
+        }
+    }).catch((error) => {
+        console.log('error', error)
+    })
+    
+})
+
+
 
 app.listen(8080, () => {
     console.log('servidor rodando !!')

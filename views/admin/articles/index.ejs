@@ -1,0 +1,63 @@
+<%- include('../../partials/header') %> <!-- o ejs identifica a partir da pasta views -->
+
+<body>
+  <%- include('../../partials/navbar')%>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <hr>
+        <h1>Artigos</h1>
+        <a href="/admin/artigos/novo" class="btn btn-success">Cadastrar Novo Artigo</a>
+        <hr>
+        <table class="table table-bordered mt-5">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Título</th>
+              <th scope="col">slug</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">body</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+              <% artigos.forEach((item)=> { %>
+                    <tr>
+                        <th><%= item.id %></th>
+                        <td><%= item.titulo %></td>
+                        <td  ><%= item.slug %></td>
+                        <td  ><%= item.category.title %></td>
+                        <td  ><%= item.body %></td>
+                        <td class="">
+                            <a href="/admin/artigos/editar/<%= item.id %>" class="btn btn-warning">Editar</a>
+                            <form method="POST" action="/delete/article" onsubmit="submitForm(event,this)" style="display: inline;" >
+                                <input type="hidden" name="id" value="<%= item.id %>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+          </tbody>
+        
+        </table>
+      </div>
+    </div>
+  </div>
+    
+
+</body>
+
+<script>
+
+  function submitForm(event,form){
+    event.preventDefault();
+    var resultado = confirm('Tme certeza que vôce quer excluir esse Artigo')
+    if(resultado){
+      form.submit()
+    }
+  }
+
+</script>
+
+<%- include('../../partials/footer') %>

@@ -1,0 +1,41 @@
+<%- include('../../partials/header') %> <!-- o ejs identifica a partir da pasta views -->
+
+<body>
+    <%- include('../../partials/navbar')%>
+  
+    <div class="container">
+        <hr>
+        <div class="card">
+            <div class="card-header">
+                <h2>Cadastre um Novo Artigo</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/save/articles">
+                    <input type="text" class="form-control"  name="title" placeholder="Defina o titulo da artigo"><br>
+                    <textarea class="form-control" name="body" id="body" cols="30" rows="10"></textarea>
+                    <select class="form-control mt-2" name="category" id="" style="width: 30%;">
+                        <option selected="true"  disabled="disabled">selecione uma categoria</option>
+                        <% categorias.forEach(item => {  %>
+                            <option value="<%= item.id %>"> <%= item.title %></option>
+                        <% }) %>
+                    </select>
+                    <button class="btn btn-success mt-2">Cadastrar</button>
+                    <a href="/admin/artigos" class="btn btn-secondary mt-2">voltar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<%- include('../../partials/footer') %>
+
+<script>
+
+    tinymce.init({
+        selector: '#body',
+        language: 'pt_BR'
+    })
+
+</script>

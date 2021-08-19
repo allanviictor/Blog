@@ -11,15 +11,16 @@
                 
             </div>
             <div class="card-body">
-                <form method="POST" action="">
-                    <input type="hidden" name="id" value="<%= %>">
-                    <textarea type="text" class="form-control" id="texto" value=">" name="body"  placeholder="Escreva seu artigo"></textarea><br>
-                    <select class="form-control mt-2 mb-2" name="category" id="" style="width: 30%;">
+                <form method="POST" action="/articles/update">
+                    <input type="text"  class="form-control" name="titulo" value="<%=artigos.titulo %>">
+                    <input type="hidden" name="id" value="<%=artigos.id %>">
+                    <textarea type="text" class="form-control" id="texto" value="<%- artigos.body %>" name="body"  placeholder="Escreva seu artigo"></textarea><br>
+                    <!-- <select class="form-control mt-2 mb-2" name="category" id="" style="width: 30%;">
                         <option selected="true"  disabled="disabled">selecione uma categoria</option>
                         <% categorias.forEach(item => {  %>
                             <option value="<%= item.id %>"> <%= item.title %></option>
                         <% }) %>
-                    </select>
+                    </select> -->
                     <button class="btn btn-success">Atualizar</button>
                     <a href="/admin/artigos" class="btn btn-secondary">voltar</a>
                 </form>

@@ -70,7 +70,16 @@ router.get('/admin/artigos/editar/:id',(req,res)=> {
             })
         }
     })
-    
+})
+
+router.post('/articles/update',(req,res)=> {
+    let id = req.body.id
+    let body = req.body.body
+    let titulo = req.body.titulo
+
+    Articles.update({ titulo: titulo, body: body }, {where: { id: id }}).then(()=>{
+        res.redirect('/admin/artigos')
+    })
 
 })
 

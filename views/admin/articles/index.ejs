@@ -28,7 +28,7 @@
                         <td><%= item.titulo %></td>
                         <td  ><%= item.slug %></td>
                         <td  ><%= item.category.title %></td>
-                        <td  ><%= item.body %></td>
+                        <td  ><%- item.body %></td>
                         <td class="">
                             <a href="/admin/artigos/editar/<%= item.id %>" class="btn btn-warning">Editar</a>
                             <form method="POST" action="/delete/article" onsubmit="submitForm(event,this)" style="display: inline;" >

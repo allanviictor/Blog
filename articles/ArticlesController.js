@@ -63,12 +63,17 @@ router.get('/admin/artigos/editar/:id',(req,res)=> {
     Articles.findByPk(id).then((article)=> {
         if(article != undefined){
             Category.findAll().then((categorias)=> {
+                console.log('article',article)
                 res.render('admin/articles/edit',{
                     artigos: article,
                     categorias: categorias
                 })
             })
+        }else{
+            res.redirect('/')
         }
+    }).catch((err)=> {
+        res.redirect('/')
     })
 })
 
@@ -76,9 +81,16 @@ router.post('/articles/update',(req,res)=> {
     let id = req.body.id
     let body = req.body.body
     let titulo = req.body.titulo
+    let categoria = req.body.category
 
-    Articles.update({ titulo: titulo, body: body }, {where: { id: id }}).then(()=>{
+    Articles.update({ titulo: titulo, body: body, slug: slugify(titulo), categoryId: categoria }, { 
+        where: { 
+            id: id 
+        }
+    }).then(()=> {
         res.redirect('/admin/artigos')
+    }).catch((error) => {
+        res.redirect('/')
     })
 
 })

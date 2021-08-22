@@ -5,6 +5,16 @@
     <%- include('./partials/navbar')%>
 
     <div class="container">
+
+        <div class="jumbotron my-5">
+            <h1 class="display-4">Home Page</h1>
+            <p class="lead">Meu Blog <!DOCTYPE html></p>
+            <hr class="my-4">
+            <p>Aprendendo sobre banco de dados utilizando nodeJS com sequelize e express</p>
+            
+        </div>
+
+
         <% articles.forEach(item => { %>
             <div class="card mt-3">
                 <div class="card-header">
@@ -17,6 +27,11 @@
                 </div>
             </div>
         <% }) %>
+        <div class="row mb-5">
+            <div class="col-12">
+                <a href="/admin/articles/paginacao/2" style="float: right;" >Next >>></a>
+            </div>
+        </div>
     </div>
 </body>
 

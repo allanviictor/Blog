@@ -21,10 +21,10 @@ app.use(express.json());
 conection
     .authenticate()
     .then(() => {
-        console.log('conexao feita com sucesso')
+        console.log('conexao com o banco ok !!')
     })
     .catch((error) =>{
-        console.log(error)
+        console.log('erro com o banco', error)
     })
 
 
@@ -33,7 +33,7 @@ app.use('/',ArticlesController);
 
 
 app.get('/',(req, resp) => {
-    Articles.findAll().then((articles) => {
+    Articles.findAll({limit: 4}).then((articles) => {
         if(articles != undefined){
             
             resp.render('home',{ articles: articles })
@@ -54,13 +54,49 @@ app.get('/:slug',(req,res) => {
             res.redirect('/')
         }
     }).catch((error) => {
-        console.log('error', error)
+        /* console.log('error', error) */
     })
     
+})
+
+app.get('/admin/articles/paginacao/:num', (req,res)=> {
+    let pagina = req.params.num
+    let offset = 0;
+
+    if(isNaN(pagina) || parseInt(pagina) == 1 || parseInt(pagina) == 0  ){
+        offset = 0;
+    }else{
+        offset = (parseInt(pagina) - 1) * 4
+    }
+
+    Articles.findAndCountAll({
+        limit: 4,
+        offset: offset
+    }).then((artigos)=> {
+
+        let next;
+
+        if(offset + 4 >= artigos.count){
+            next = false
+        }else{
+            next = true
+        }
+
+        var result = {
+            next,
+            pageCurrent: parseInt(pagina) ,
+            artigos,
+        }
+
+
+        res.render('admin/articles/pagination',{ result })
+        /* console.log('result',result) */
+        
+    })
 })
 
 
 
 app.listen(8080, () => {
-    console.log('servidor rodando !!')
+    console.log('servidor ok !!')
 });

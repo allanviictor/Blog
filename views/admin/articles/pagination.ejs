@@ -1,0 +1,45 @@
+<%- include('../../partials/header') %>
+
+<body>
+   
+    <%- include('../../partials/navbar')%>
+
+    
+    <div class="container">
+        <% result.artigos.rows.forEach(item => { %>
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h2> <%= item.titulo %> </h2>
+                </div>
+                <div class="card-body">
+                    <form method="" action="">
+                        <a href="/<%= item.slug%>" class="btn btn-success mt-2">Visualizar</a>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+        <div class="row">
+            <div class="col-12">
+
+
+                <% if(result.pageCurrent > 2) { %>
+                    <a href="/admin/articles/paginacao/<%= (result.pageCurrent - 1) %>" style="float: left;" ><<< Prev</a>
+                <% }else if(result.pageCurrent == 2) { %>
+                    <a href="/" style="float: left;" ><<< Prev</a>
+                <% } %>
+
+                <% if(result.next == true){ %>
+                    <a href="/admin/articles/paginacao/<%= (result.pageCurrent + 1) %>" style="float: right;" >Next >>></a>
+                <% } %>
+                    
+            </div>
+        </div>
+    </div>
+    
+    
+
+</body>
+
+
+
+<%- include('../../partials/footer') %>

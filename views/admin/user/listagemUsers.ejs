@@ -1,0 +1,52 @@
+<%- include('../../partials/header') %>
+
+
+
+<body>
+    <%- include('../../partials/navbar')%>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+              <hr>
+              <h1>Usarios Cadastrados</h1>
+              <hr>
+              <table class="table table-bordered mt-5">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach((item) => { %>
+                      <tr>
+                        <form method="POST" action="/admin/delete/user" onsubmit="validarDeletacao(event,this)">
+                          <td><%= item.id %></td>
+                          <td><%= item.email %></td>
+                          <td>
+                            <input type="hidden" name="id" value="<%= item.id %>">
+                            <a href="/admin/edit/user/<%= item.id %>" class="btn btn-warning">editar</a>
+                            <button type="submit" class="btn btn-danger">excluir</button>
+                          </td>
+                        </form>
+                      </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+  function validarDeletacao(event,form){
+    event.preventDefault();
+    let confirmar = confirm('Tem Certeza que deseja Excluir o email Cadastrado')
+    if(confirmar){
+      form.submit()
+    }
+  }
+</script>
+
+
+<%- include('../../partials/footer') %>

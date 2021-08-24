@@ -1,0 +1,28 @@
+<%- include('../../partials/header') %>
+
+
+
+<body>
+    <%- include('../../partials/navbar')%>
+    <div class="container">
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2> Criar uma Nova Conta </h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/save/user">
+                    <input type="email" name="email" placeholder="Email" class="form-control">
+                    <input type="password" name="senha" placeholder="Senha" class="form-control mt-3">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success mt-3">Criar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+
+
+<%- include('../../partials/footer') %>

@@ -1,0 +1,41 @@
+<%- include('../../partials/header') %> <!-- o ejs identifica a partir da pasta views -->
+
+<body>
+    <%- include('../../partials/navbar')%>
+  
+    <div class="container">
+        <hr>
+        <div class="card">
+            <div class="card-header">
+                <h2>Alterar E-mail e Senha</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/admin/edit/save" onsubmit="validarForm(event,this)">
+                    <input type="hidden" name="id" value="<%= user.id %>">
+                    <input type="email" value="<%= user.email %>" name="email" placeholder="Email" class="form-control">
+                    <input type="password" name="senha" placeholder="Senha" class="form-control mt-3">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success mt-3">Alterar</button>
+                        <a href="/admin/login" class="btn btn-secondary">voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+
+</body>
+
+<script>
+   function validarForm(event,form){
+        event.preventDefault()
+        let resultado = confirm('Tem certeza que deseja alterar esse usuario')
+        if(resultado){
+            form.submit()
+        }
+    }
+</script>
+
+
+<%- include('../../partials/footer') %>

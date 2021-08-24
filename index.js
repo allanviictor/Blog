@@ -3,7 +3,9 @@ const app = express()
 const conection = require('./database/connection')
 const CategoriesController = require('./categories/CategoriesController')
 const ArticlesController = require('./articles/ArticlesController')
+const UsersController = require('./users/usersController')
 
+const User = require('./users/user')
 const Categories = require('./categories/Category')
 const Articles = require('./articles/Articles')
 
@@ -28,6 +30,8 @@ conection
     })
 
 
+
+app.use('/',UsersController)
 app.use('/',CategoriesController);
 app.use('/',ArticlesController);
 
